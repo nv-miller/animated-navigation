@@ -11,6 +11,7 @@
 
 html {
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -19,9 +20,162 @@ body {
 	font-family: Nunito;
 }
 
+body.locked {
+	overflow: hidden;
+}
+
 /* --- Navigation Menu ------------------------------ */
+.overlay {
+	position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	z-index: 9;
+	inset: 0;
+	background-color: rgba(0, 0, 0, .7);
+	transition: all .5s ease 0s;
+}
 
+.menu-open .overlay {
+	opacity: 1;
+	visibility: visible;
+}
 
+/* Nav Menu Items */
+
+nav,
+nav ul {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+nav li:nth-of-type(1) {
+	background-color: var(--navColor1);
+}
+
+nav li:nth-of-type(2) {
+	background-color: var(--navColor2);
+}
+
+nav li:nth-of-type(3) {
+	background-color: var(--navColor3);
+}
+
+nav li:nth-of-type(4) {
+	background-color: var(--navColor4);
+}
+
+nav li:nth-of-type(5) {
+	background-color: var(--navColor5);
+}
+
+nav ul {
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	list-style: none;
+}
+
+nav ul li {
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav li a {
+	color: #fff;
+	font-size: 24px;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 4px;
+	transition: scale 0.3s ease 0s;
+	position: relative;
+}
+
+nav li a::after {
+	content: '';
+	height: 1px;
+	width: 0;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	background-color: #fff;
+	transition: all 0.3s ease 0s;
+}
+
+nav li a:hover {
+	scale: 1.2;
+}
+
+nav li a:hover::after {
+	left: 0;
+	width: 100%;
+}
+
+/* Slide-in Animation for each nav item */
+
+.slide-in-1 {
+	animation: slide-in .4s linear .2s both;
+}
+
+.slide-in-2 {
+	animation: slide-in .4s linear .4s both;
+}
+
+.slide-in-3 {
+	animation: slide-in .4s linear .6s both;
+}
+
+.slide-in-4 {
+	animation: slide-in .4s linear .8s both;
+}
+
+.slide-in-5 {
+	animation: slide-in .4s linear 1s both;
+}
+
+@keyframes slide-in {
+	0% {
+		transform: translateX(-100%);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+/* Slide-out Animation for each nav item */
+
+.slide-out-1 {
+	animation: slide-out .3s linear .5s both;
+}
+
+.slide-out-2 {
+	animation: slide-out .3s linear .4s both;
+}
+
+.slide-out-3 {
+	animation: slide-out .3s linear .3s both;
+}
+
+.slide-out-4 {
+	animation: slide-out .3s linear .2s both;
+}
+
+.slide-out-5 {
+	animation: slide-out .3s linear .1s both;
+}
+
+@keyframes slide-out {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-100%);
+	}
+}
 
 /* --- Menu Bars ------------------------------------ */
 
@@ -45,17 +199,17 @@ body {
 }
 
 /* Rotate first bar */
-.change .bar1 {
+.menu-open .bar1 {
 	transform: rotate(-45deg) translate(-7px, 8px);
 }
 
 /* Fade out the second bar */
-.change .bar2 {
+.menu-open .bar2 {
 	opacity: 0;
 }
 
 /* Rotate last bar */
-.change .bar3 {
+.menu-open .bar3 {
 	transform: rotate(45deg) translate(-6px, -8px);
 }
 
